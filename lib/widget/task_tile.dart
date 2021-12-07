@@ -21,15 +21,15 @@ class TaskTile extends StatelessWidget {
         style: GoogleFonts.nunito(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: isChecked == true ? Colors.redAccent : Colors.black,
+          color: isChecked == true ? Colors.green : Colors.black,
           decoration: isChecked == true ? TextDecoration.lineThrough : null,
         ),
       ),
       trailing: Checkbox(
         activeColor: Colors.lightBlueAccent,
         value: isChecked,
-        onChanged: (bool? value) {
-          checkBoxCallBack(value);
+        onChanged: (value) {
+          checkBoxCallBack();
         },
       ),
     );

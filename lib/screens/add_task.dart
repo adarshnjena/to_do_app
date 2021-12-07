@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function valReturn;
-  const AddTaskScreen({Key? key, required this.valReturn}) : super(key: key);
+  const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,11 @@ class AddTaskScreen extends StatelessWidget {
                   backgroundColor: Colors.lightBlueAccent,
                 ),
                 onPressed: () {
-                  valReturn(newTaskTitle);
+                  if (newTaskTitle != '') {
+                    Provider.of<TaskData>(context, listen: false)
+                        .addTask(newTaskTitle);
+                  }
+                  Navigator.pop(context);
                 },
                 child: Text(
                   'Add Task',

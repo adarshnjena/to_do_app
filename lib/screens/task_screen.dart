@@ -2,23 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do/models/tasks.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do/models/task_data.dart';
 import 'package:to_do/screens/add_task.dart';
 import 'package:to_do/widget/task_list.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy egg'),
-    Task(name: 'Buy bread'),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +19,7 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(
-              valReturn: (value) {
-                setState(() {
-                  tasks.add(Task(name: value));
-                });
-                Navigator.pop(context);
-              },
-            ),
+            builder: (context) => const AddTaskScreen(),
           );
         },
         child: const Icon(Icons.add),
@@ -68,7 +52,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: GoogleFonts.nunito(
                     fontSize: 18,
                     color: Colors.white,
@@ -87,7 +71,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: TaskList(tasks: tasks),
+              child: const TaskList(),
             ),
           ),
         ],
