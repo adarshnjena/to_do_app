@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:to_do/models/tasks.dart';
 import 'package:to_do/widget/task_tile.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class TaskList extends StatefulWidget {
+class TaskList extends StatelessWidget {
   const TaskList({Key? key}) : super(key: key);
 
-  @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('tasks');
@@ -29,9 +25,9 @@ class _TaskListState extends State<TaskList> {
                   taskTitle: data.name,
                   isChecked: data.isDone,
                   checkBoxCallBack: () {
-                    setState(() {
-                      data.isDone = !data.isDone;
-                    });
+                    bool temp = !data.isDone;
+                    String tempName = data.name;
+                    box.put(index, Task(name: tempName, isDone: temp));
                   },
                 ),
                 startActionPane: ActionPane(
@@ -64,9 +60,9 @@ class _TaskListState extends State<TaskList> {
                       // An action can be bigger than the others.
                       flex: 2,
                       onPressed: (context) {
-                        setState(() {
-                          data.isDone = !data.isDone;
-                        });
+                        bool temp = !data.isDone;
+                        String tempName = data.name;
+                        box.put(index, Task(name: tempName, isDone: temp));
                       },
                       backgroundColor: data.isDone == false
                           ? const Color(0xFF7BC043)
