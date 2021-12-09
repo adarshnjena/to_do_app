@@ -27,7 +27,7 @@ class TaskList extends StatelessWidget {
                   checkBoxCallBack: () {
                     bool temp = !data.isDone;
                     String tempName = data.name;
-                    box.put(index, Task(name: tempName, isDone: temp));
+                    box.putAt(index, Task(name: tempName, isDone: temp));
                   },
                 ),
                 startActionPane: ActionPane(
@@ -62,7 +62,7 @@ class TaskList extends StatelessWidget {
                       onPressed: (context) {
                         bool temp = !data.isDone;
                         String tempName = data.name;
-                        box.put(index, Task(name: tempName, isDone: temp));
+                        box.putAt(index, Task(name: tempName, isDone: temp));
                       },
                       backgroundColor: data.isDone == false
                           ? const Color(0xFF7BC043)
