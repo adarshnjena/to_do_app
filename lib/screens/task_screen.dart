@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:to_do/models/task_data.dart';
+import 'package:hive/hive.dart';
 import 'package:to_do/screens/add_task.dart';
 import 'package:to_do/widget/task_list.dart';
 
@@ -52,7 +51,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${Provider.of<TaskData>(context).taskCount} Tasks',
+                  '${Hive.box('tasks').length} Tasks',
                   style: GoogleFonts.nunito(
                     fontSize: 18,
                     color: Colors.white,

@@ -20,9 +20,9 @@ class TaskTile extends StatelessWidget {
         taskTitle,
         style: GoogleFonts.nunito(
           fontSize: 20,
-          fontWeight: FontWeight.w600,
           color: isChecked == true ? Colors.green : Colors.black,
           decoration: isChecked == true ? TextDecoration.lineThrough : null,
+          fontWeight: isChecked == true ? FontWeight.w600 : FontWeight.normal,
         ),
       ),
       trailing: Checkbox(

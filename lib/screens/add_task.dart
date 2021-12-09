@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:to_do/models/task_data.dart';
+import 'package:hive/hive.dart';
+import 'package:to_do/models/tasks.dart';
 
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String newTaskTitle = '';
+    late String newTaskTitle;
     return Container(
       color: const Color(0xFF757575),
       child: Container(
@@ -47,8 +47,8 @@ class AddTaskScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   if (newTaskTitle != '') {
-                    Provider.of<TaskData>(context, listen: false)
-                        .addTask(newTaskTitle);
+                    final box = Hive.box('tasks');
+                    box.add(Task(name: newTaskTitle));
                   }
                   Navigator.pop(context);
                 },
